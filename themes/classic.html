@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base href="https://puzzle-dungeon.github.io/">
+<meta charset="UTF-8">
+<meta name="description" content="Puzzle Dungeon is a cell-based puzzle game.
+	Page: Themes - classic">
+<meta name="keywords" content="puzzles, puzzle game, dungeon,
+	atomix, stoneage, chip challenge,
+	sokoban, sokoban solver, sokoban generator,
+	atomix puzzle,
+	barrel puzzle,
+	color puzzle,
+	fifteen puzzle,
+	gate puzzle,
+	hero puzzle,
+	lock puzzle,
+	memory puzzle,
+	minotaur puzzle,
+	mirror puzzle,
+	portal puzzle,
+	rotatepic puzzle,
+	stoneage puzzle,
+	switchbox puzzle,
+	puzzle dungeon">
+<link rel="icon" type="image/png" href="images/ancient2/portal.png">
+<title>Puzzle Dungeon - Themes - classic</title>
+<style>
+html {
+	height: 100%;
+}
+body {
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+div {
+	margin: 0px;
+	padding: 0px;
+}
+
+#body {
+	display: grid;
+	grid-gap: 0px;
+	grid-template-columns: 256px;
+	grid-template-rows: 128px 128px;
+	grid-template-areas:
+		"logo    header"
+		"logo    content"
+		"sidebar content";
+	height: 100%;
+}
+
+#logo {
+	grid-area: logo;
+}
+
+#sidebar {
+	grid-area: sidebar;
+	background: url("sidebar-bg.jpg") repeat #dcb;
+	color: navy;
+	padding: 10px;
+	text-align: center;
+}
+
+#header {
+	grid-area: header;
+	background: url("header-bg.jpg") repeat #234;
+}
+
+#content {
+	grid-area: content;
+	background: url("content-bg.jpg") repeat #567;
+	padding: 10px;
+	color: #f0f0f0;
+}
+
+#categories {
+	margin: 0px 0px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: center;
+	height: 100%;
+}
+
+button {
+	white-space: nowrap;
+	font-family: Arial, sans-serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+.category {
+	margin: auto 7px;
+	border: 1px solid black;
+	border-radius: 16px;
+	width: 160px;
+	height: 52px;
+	background: #4e5f6d;
+	color: #e0e0e0;
+	font-size: 22px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.current-category {
+	background: #46b482;
+}
+
+.category:hover {
+	background: #4682b4;
+	color: white;
+	transform: translateY(-3px) scale(110%);
+}
+
+.current-category:hover {
+	background: #46b482;
+}
+
+.page {
+	display: block;
+	margin: 3px auto;
+	border: 1px solid rgba(32, 32, 32, 0.2);
+	border-radius: 3px;
+	width: 220px;
+	height: 30px;
+	overflow: hidden;
+	background: transparent;
+	backdrop-filter: brightness(90%);
+	color: #111;
+	font-size: 18px;
+	font-weight: normal;
+}
+
+.current-page {
+	backdrop-filter: hue-rotate(80deg) brightness(90%);
+}
+
+.page:hover {
+	transform: scale(105%);
+	backdrop-filter: hue-rotate(110deg) brightness(90%);
+	color: #000;
+}
+
+.current-page:hover {
+	backdrop-filter: hue-rotate(80deg) brightness(90%);
+}
+
+#sidebar hr {
+	border: 0.5px solid rgba(32, 32, 32, 0.2);
+	width: 200px;
+	margin: 12px auto;
+}
+
+#content h1 {
+	margin: -10px;
+	margin-bottom: 0px;
+	padding: 10px;
+	backdrop-filter: brightness(90%);
+	text-align: center;
+}
+
+#content code {
+	display: block;
+	padding: 10px;
+	backdrop-filter: contrast(60%);
+}
+
+#content table {
+	color: inherit;
+	padding: 10px;
+	border: solid 1px #234;
+}
+
+#content a {
+	color: rgb(255, 255, 128);
+	text-decoration: none;
+}
+
+#content a:visited {
+	color: rgb(100, 200, 40);
+}
+
+#content a:active {
+	color: rgb(220, 110, 110);
+}
+
+.puzzle-entry {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	border-bottom: 1px solid rgba(16, 16, 16, 0.4);
+}
+
+.puzzle-info {
+	flex: 1;
+}
+
+.puzzle-info p:not(.goal) {
+	text-align: justify;
+	text-justify: auto;
+	padding-right: 10px;
+}
+
+.puzzle-screenshot {
+	width: 256px;
+}
+
+.puzzle-screenshot img {
+	width: 256px;
+	object-fit: scale-down;
+	padding: 6px 0px;
+}
+
+p.goal {
+	 font-style: italic;
+}
+
+p.goal:before {
+	 content: "Goal: ";
+}
+
+#img-table {
+	padding: 10px;
+	width: 100%;
+	table-layout: fixed;
+}
+
+#img-table tr > * {
+	margin: 0px;
+	padding: 1px;
+	white-space: nowrap;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#img-table th {
+	font: 14px Arial, sans-serif;
+	overflow: hidden;
+}
+
+#img-table tr:first-child > th:not(:first-child) {
+	font-size: 12px;
+}
+
+#img-table .zoom,
+#img-table tr > th:not(:first-child) {
+	height: 32px;
+}
+
+#img-table th:first-child {
+	width: 70px;
+}
+
+.img-table-full tr > th:first-child {
+	height: 64px;
+}
+
+.img-table-half tr > th:first-child {
+	height: 28px;
+}
+
+.img-table-full tr > th:not(:first-child) {
+	width: 64px;
+}
+
+.img-table-half tr > th:not(:first-child) {
+	width: 28px;
+}
+
+.img-table-half tr > td {
+	width: 28px;
+	height: 28px;
+}
+
+.img-table-full tr > td {
+	width: 64px;
+	height: 64px;
+}
+
+.img-table-half img {
+	width: 28px;
+	height: 28px;
+}
+
+.img-table-full img {
+	width: 64px;
+	height: 64px;
+}
+
+.img-table-full img[title="char"], .img-table-full img[title="enemy"] {
+	width: 50px;
+	height: 50px;
+}
+
+#img-table .zoom {
+	text-align: left;
+}
+
+.home-medias {
+	width: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.all-medias {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: flex-start;
+}
+
+.home-medias .media {
+	margin: 4px;
+	max-width: 20%;
+}
+
+.all-medias .media {
+	margin: 4px;
+	flex-basis: 24%;
+	max-width: 24%;
+}
+
+.media img, .media video {
+	width: 100%;
+	object-fit: scale-down;
+}
+
+.media-title {
+	margin: 2px;
+	height: 20px;
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+	color: #ffffa0;
+}
+
+div.media-container {
+	padding: 1px;
+	width: 100%;
+	text-align: center;
+}
+
+.media {
+	object-fit: scale-down;
+	margin: 0px auto;
+}
+
+.media-property {
+	display: inline;
+	float: right;
+	padding: 0px 10px 0px 30px;
+}
+
+pre.highlight  {
+	width: 100%;
+	color: #e0e0e0;
+	background-color: #6080c0;
+	font-size: 10pt;
+	font-family: 'Courier New', monospace;
+	white-space: pre;
+	overflow: auto;
+}
+.highlight.num { color: #60f0f0; }
+.highlight.sng { color: #60f0f0; }
+.highlight.opt { color: #ffffff; }
+.highlight.kwa { color: #ffffff; font-weight: bold; }
+.highlight.kwb { color: #f0a0a0; }
+.highlight.kwd { color: #a0f0a0; }
+</style>
+</head>
+
+<body>
+<div id="body">
+<div id="logo">
+<a href="./"><img src="puzzle-dungeon-logo.jpg" alt="Ⓟⓤⓩⓩⓛⓔ Ⓓⓤⓝⓖⓔⓞⓝ"></a>
+</div>
+<div id="sidebar">
+<a href="themes/"><button class="page">All Themes</button></a>
+<a href="themes/ancient1.html"><button class="page"> ancient1 </button></a>
+<a href="themes/ancient2.html"><button class="page"> ancient2 </button></a>
+<a href="themes/classic.html"><button class="page current-page"> classic </button></a>
+<a href="themes/default.html"><button class="page"> default </button></a>
+<a href="themes/minecraft.html"><button class="page"> minecraft </button></a>
+<a href="themes/modern1.html"><button class="page"> modern1 </button></a>
+<a href="themes/modern2.html"><button class="page"> modern2 </button></a>
+<a href="themes/moss.html"><button class="page"> moss </button></a>
+<a href="themes/stoneage1.html"><button class="page"> stoneage1 </button></a>
+<a href="themes/stoneage2.html"><button class="page"> stoneage2 </button></a>
+<a href="themes/stoneage3.html"><button class="page"> stoneage3 </button></a>
+<a href="themes/stoneage4.html"><button class="page"> stoneage4 </button></a>
+<a href="themes/stoneage5.html"><button class="page"> stoneage5 </button></a>
+
+</div>
+<div id="header">
+<div id="categories">
+<a href="./"><button class="category">Home</button></a>
+<a href="./puzzles/"><button class="category">Puzzles</button></a>
+<a href="./videos/"><button class="category">Videos</button></a>
+<a href="./screenshots/"><button class="category">Screenshots</button></a>
+<a href="./themes/"><button class="category current-category">Themes</button></a>
+<a href="./tutorials/"><button class="category">Tutorials</button></a>
+</div>
+</div>
+<div id="content">
+<h1>Theme "classic"</h1>
+<script>function toggle_zoom() { elem = document.getElementById("img-table"); elem.className = elem.className == "img-table-half" ? "img-table-full" : "img-table-half" }</script>
+<table id="img-table" class="img-table-half">
+<tr><th class="zoom"><a href="javascript:toggle_zoom()">🔍</a></th><th title="barrel">barrel</th><th title="bones">bones</th><th title="char">char</th><th title="cloud">cloud</th><th title="crack">crack</th><th title="cursor">cursor</th><th title="dird">dird</th><th title="dirl">dirl</th><th title="dirr">dirr</th><th title="diru">diru</th><th title="enemy">enemy</th><th title="finish">finish</th><th title="floor">floor</th><th title="floor_gray_frame">floor_gray_frame</th><th title="floor_gray_tiles">floor_gray_tiles</th><th title="gate0">gate0</th><th title="gate1">gate1</th><th title="heart">heart</th><th title="key1">key1</th><th title="key2">key2</th><th title="lift-empty">lift-empty</th><th title="lifta">lifta</th><th title="liftd">liftd</th><th title="lifth">lifth</th><th title="liftl">liftl</th><th title="liftn">liftn</th><th title="liftr">liftr</th><th title="liftu">liftu</th><th title="liftv">liftv</th><th title="lock1">lock1</th><th title="lock2">lock2</th><th title="might">might</th><th title="plate">plate</th><th title="portal">portal</th><th title="rocks">rocks</th><th title="sand">sand</th><th title="sphere-gray">sphere-gray</th><th title="start">start</th><th title="status">status</th><th title="sword">sword</th><th title="wall">wall</th></tr>
+<tr><th>own</th><td><img title="barrel" src="images/classic/barrel.png"></td><td><img title="bones" src="images/classic/bones.png"></td><td>-</td><td><img title="cloud" src="images/classic/cloud.png"></td><td><img title="crack" src="images/classic/crack.png"></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><img title="finish" src="images/classic/finish.png"></td><td><img title="floor" src="images/classic/floor.png"></td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td><img title="plate" src="images/classic/plate.png"></td><td><img title="portal" src="images/classic/portal.png"></td><td><img title="rocks" src="images/classic/rocks.png"></td><td>-</td><td>-</td><td>-</td><td><img title="status" src="images/classic/status.png"></td><td>-</td><td><img title="wall" src="images/classic/wall.png"></td></tr>
+<tr><th>actual</th><td><img title="barrel" src="images/classic/barrel.png"></td><td><img title="bones" src="images/classic/bones.png"></td><td><img title="char" src="images/default/char.png"></td><td><img title="cloud" src="images/classic/cloud.png"></td><td><img title="crack" src="images/classic/crack.png"></td><td><img title="cursor" src="images/default/cursor.png"></td><td><img title="dird" src="images/default/dird.png"></td><td><img title="dirl" src="images/default/dirl.png"></td><td><img title="dirr" src="images/default/dirr.png"></td><td><img title="diru" src="images/default/diru.png"></td><td><img title="enemy" src="images/default/enemy.png"></td><td><img title="finish" src="images/classic/finish.png"></td><td><img title="floor" src="images/classic/floor.png"></td><td><img title="floor_gray_frame" src="images/default/floor_gray_frame.png"></td><td><img title="floor_gray_tiles" src="images/default/floor_gray_tiles.png"></td><td><img title="gate0" src="images/default/gate0.png"></td><td><img title="gate1" src="images/default/gate1.png"></td><td><img title="heart" src="images/default/heart.png"></td><td><img title="key1" src="images/default/key1.png"></td><td><img title="key2" src="images/default/key2.png"></td><td><img title="lift-empty" src="images/default/lift-empty.png"></td><td><img title="lifta" src="images/default/lifta.png"></td><td><img title="liftd" src="images/default/liftd.png"></td><td><img title="lifth" src="images/default/lifth.png"></td><td><img title="liftl" src="images/default/liftl.png"></td><td><img title="liftn" src="images/default/liftn.png"></td><td><img title="liftr" src="images/default/liftr.png"></td><td><img title="liftu" src="images/default/liftu.png"></td><td><img title="liftv" src="images/default/liftv.png"></td><td><img title="lock1" src="images/default/lock1.png"></td><td><img title="lock2" src="images/default/lock2.png"></td><td><img title="might" src="images/default/might.png"></td><td><img title="plate" src="images/classic/plate.png"></td><td><img title="portal" src="images/classic/portal.png"></td><td><img title="rocks" src="images/classic/rocks.png"></td><td><img title="sand" src="images/default/sand.png"></td><td><img title="sphere-gray" src="images/default/sphere-gray.png"></td><td><img title="start" src="images/default/start.png"></td><td><img title="status" src="images/classic/status.png"></td><td><img title="sword" src="images/default/sword.png"></td><td><img title="wall" src="images/classic/wall.png"></td></tr>
+</table>
+<br>
+<h1>Videos of theme "classic"</h1>
+<div id="videos" class="all-medias">
+<div class="media"><div class="media-title">Minotaur Puzzle levels</div><a href="videos/minotaur-puzzle-1.html"><video><source src="videos/minotaur-puzzle-1.webm"></video></a></div>
+<div class="media"><div class="media-title">SwitchBox Puzzle levels 1-4</div><a href="videos/switchbox-puzzle-1.html"><video><source src="videos/switchbox-puzzle-1.webm"></video></a></div>
+</div>
+<br>
+<h1>Screenshots of theme "classic"</h1>
+<div id="screenshots" class="all-medias">
+<div class="media"><div class="media-title">Gate puzzle with 2 gates and 2 plates</div><a href="screenshots/gate-puzzle-1.html"><img src="screenshots/gate-puzzle-1.webp"></a></div>
+<div class="media"><div class="media-title">Generated Hero puzzle level</div><a href="screenshots/hero-puzzle-1.html"><img src="screenshots/hero-puzzle-1.webp"></a></div>
+<div class="media"><div class="media-title">Generated Hero puzzle level (solved)</div><a href="screenshots/hero-puzzle-2.html"><img src="screenshots/hero-puzzle-2.webp"></a></div>
+<div class="media"><div class="media-title">Memory puzzle with four 5x5 rooms of 12 color pairs</div><a href="screenshots/memory-puzzle-4.html"><img src="screenshots/memory-puzzle-4.webp"></a></div>
+</div>
+
+</div>
+</div>
+</body>
+</html>

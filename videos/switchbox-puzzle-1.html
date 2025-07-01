@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base href="https://puzzle-dungeon.github.io/">
+<meta charset="UTF-8">
+<meta name="description" content="Puzzle Dungeon is a cell-based puzzle game.
+	Page: Videos - switchbox-puzzle-1">
+<meta name="keywords" content="puzzles, puzzle game, dungeon,
+	atomix, stoneage, chip challenge,
+	sokoban, sokoban solver, sokoban generator,
+	atomix puzzle,
+	barrel puzzle,
+	color puzzle,
+	fifteen puzzle,
+	gate puzzle,
+	hero puzzle,
+	lock puzzle,
+	memory puzzle,
+	minotaur puzzle,
+	mirror puzzle,
+	portal puzzle,
+	rotatepic puzzle,
+	stoneage puzzle,
+	switchbox puzzle,
+	puzzle dungeon">
+<link rel="icon" type="image/png" href="images/ancient2/portal.png">
+<title>Puzzle Dungeon - Videos - switchbox-puzzle-1</title>
+<style>
+html {
+	height: 100%;
+}
+body {
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+div {
+	margin: 0px;
+	padding: 0px;
+}
+
+#body {
+	display: grid;
+	grid-gap: 0px;
+	grid-template-columns: 256px;
+	grid-template-rows: 128px 128px;
+	grid-template-areas:
+		"logo    header"
+		"logo    content"
+		"sidebar content";
+	height: 100%;
+}
+
+#logo {
+	grid-area: logo;
+}
+
+#sidebar {
+	grid-area: sidebar;
+	background: url("sidebar-bg.jpg") repeat #dcb;
+	color: navy;
+	padding: 10px;
+	text-align: center;
+}
+
+#header {
+	grid-area: header;
+	background: url("header-bg.jpg") repeat #234;
+}
+
+#content {
+	grid-area: content;
+	background: url("content-bg.jpg") repeat #567;
+	padding: 10px;
+	color: #f0f0f0;
+}
+
+#categories {
+	margin: 0px 0px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: center;
+	height: 100%;
+}
+
+button {
+	white-space: nowrap;
+	font-family: Arial, sans-serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+.category {
+	margin: auto 7px;
+	border: 1px solid black;
+	border-radius: 16px;
+	width: 160px;
+	height: 52px;
+	background: #4e5f6d;
+	color: #e0e0e0;
+	font-size: 22px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.current-category {
+	background: #46b482;
+}
+
+.category:hover {
+	background: #4682b4;
+	color: white;
+	transform: translateY(-3px) scale(110%);
+}
+
+.current-category:hover {
+	background: #46b482;
+}
+
+.page {
+	display: block;
+	margin: 3px auto;
+	border: 1px solid rgba(32, 32, 32, 0.2);
+	border-radius: 3px;
+	width: 220px;
+	height: 30px;
+	overflow: hidden;
+	background: transparent;
+	backdrop-filter: brightness(90%);
+	color: #111;
+	font-size: 18px;
+	font-weight: normal;
+}
+
+.current-page {
+	backdrop-filter: hue-rotate(80deg) brightness(90%);
+}
+
+.page:hover {
+	transform: scale(105%);
+	backdrop-filter: hue-rotate(110deg) brightness(90%);
+	color: #000;
+}
+
+.current-page:hover {
+	backdrop-filter: hue-rotate(80deg) brightness(90%);
+}
+
+#sidebar hr {
+	border: 0.5px solid rgba(32, 32, 32, 0.2);
+	width: 200px;
+	margin: 12px auto;
+}
+
+#content h1 {
+	margin: -10px;
+	margin-bottom: 0px;
+	padding: 10px;
+	backdrop-filter: brightness(90%);
+	text-align: center;
+}
+
+#content code {
+	display: block;
+	padding: 10px;
+	backdrop-filter: contrast(60%);
+}
+
+#content table {
+	color: inherit;
+	padding: 10px;
+	border: solid 1px #234;
+}
+
+#content a {
+	color: rgb(255, 255, 128);
+	text-decoration: none;
+}
+
+#content a:visited {
+	color: rgb(100, 200, 40);
+}
+
+#content a:active {
+	color: rgb(220, 110, 110);
+}
+
+.puzzle-entry {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	border-bottom: 1px solid rgba(16, 16, 16, 0.4);
+}
+
+.puzzle-info {
+	flex: 1;
+}
+
+.puzzle-info p:not(.goal) {
+	text-align: justify;
+	text-justify: auto;
+	padding-right: 10px;
+}
+
+.puzzle-screenshot {
+	width: 256px;
+}
+
+.puzzle-screenshot img {
+	width: 256px;
+	object-fit: scale-down;
+	padding: 6px 0px;
+}
+
+p.goal {
+	 font-style: italic;
+}
+
+p.goal:before {
+	 content: "Goal: ";
+}
+
+#img-table {
+	padding: 10px;
+	width: 100%;
+	table-layout: fixed;
+}
+
+#img-table tr > * {
+	margin: 0px;
+	padding: 1px;
+	white-space: nowrap;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#img-table th {
+	font: 14px Arial, sans-serif;
+	overflow: hidden;
+}
+
+#img-table tr:first-child > th:not(:first-child) {
+	font-size: 12px;
+}
+
+#img-table .zoom,
+#img-table tr > th:not(:first-child) {
+	height: 32px;
+}
+
+#img-table th:first-child {
+	width: 70px;
+}
+
+.img-table-full tr > th:first-child {
+	height: 64px;
+}
+
+.img-table-half tr > th:first-child {
+	height: 28px;
+}
+
+.img-table-full tr > th:not(:first-child) {
+	width: 64px;
+}
+
+.img-table-half tr > th:not(:first-child) {
+	width: 28px;
+}
+
+.img-table-half tr > td {
+	width: 28px;
+	height: 28px;
+}
+
+.img-table-full tr > td {
+	width: 64px;
+	height: 64px;
+}
+
+.img-table-half img {
+	width: 28px;
+	height: 28px;
+}
+
+.img-table-full img {
+	width: 64px;
+	height: 64px;
+}
+
+.img-table-full img[title="char"], .img-table-full img[title="enemy"] {
+	width: 50px;
+	height: 50px;
+}
+
+#img-table .zoom {
+	text-align: left;
+}
+
+.home-medias {
+	width: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.all-medias {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: flex-start;
+}
+
+.home-medias .media {
+	margin: 4px;
+	max-width: 20%;
+}
+
+.all-medias .media {
+	margin: 4px;
+	flex-basis: 24%;
+	max-width: 24%;
+}
+
+.media img, .media video {
+	width: 100%;
+	object-fit: scale-down;
+}
+
+.media-title {
+	margin: 2px;
+	height: 20px;
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+	color: #ffffa0;
+}
+
+div.media-container {
+	padding: 1px;
+	width: 100%;
+	text-align: center;
+}
+
+.media {
+	object-fit: scale-down;
+	margin: 0px auto;
+}
+
+.media-property {
+	display: inline;
+	float: right;
+	padding: 0px 10px 0px 30px;
+}
+
+pre.highlight  {
+	width: 100%;
+	color: #e0e0e0;
+	background-color: #6080c0;
+	font-size: 10pt;
+	font-family: 'Courier New', monospace;
+	white-space: pre;
+	overflow: auto;
+}
+.highlight.num { color: #60f0f0; }
+.highlight.sng { color: #60f0f0; }
+.highlight.opt { color: #ffffff; }
+.highlight.kwa { color: #ffffff; font-weight: bold; }
+.highlight.kwb { color: #f0a0a0; }
+.highlight.kwd { color: #a0f0a0; }
+</style>
+</head>
+
+<body>
+<div id="body">
+<div id="logo">
+<a href="./"><img src="puzzle-dungeon-logo.jpg" alt="Ⓟⓤⓩⓩⓛⓔ Ⓓⓤⓝⓖⓔⓞⓝ"></a>
+</div>
+<div id="sidebar">
+<a href="videos/"><button class="page">All Videos</button></a>
+<a href="videos/minotaur-puzzle-1.html"><button class="page">minotaur-puzzle-1</button></a>
+<a href="videos/stoneage-puzzle-1.html"><button class="page">stoneage-puzzle-1</button></a>
+<a href="videos/switchbox-puzzle-1.html"><button class="page current-page">switchbox-puzzle-1</button></a>
+
+</div>
+<div id="header">
+<div id="categories">
+<a href="./"><button class="category">Home</button></a>
+<a href="./puzzles/"><button class="category">Puzzles</button></a>
+<a href="./videos/"><button class="category current-category">Videos</button></a>
+<a href="./screenshots/"><button class="category">Screenshots</button></a>
+<a href="./themes/"><button class="category">Themes</button></a>
+<a href="./tutorials/"><button class="category">Tutorials</button></a>
+</div>
+</div>
+<div id="content">
+<h1>SwitchBox Puzzle levels 1-4</h1>
+
+<p class="media-property"><b>Puzzles</b>: <a href="puzzles/switchbox.html">switchbox</a></p>
+<p class="media-property"><b>Themes</b>: <a href="themes/classic.html">classic</a>, <a href="themes/modern1.html">modern1</a>, <a href="themes/ancient2.html">ancient2</a>, <a href="themes/default.html">default</a></p>
+<p>
+The puzzle goal is to reach finish by moving barrels into plates. Each
+plate, when pressed by the player or a barrel, opens all gates and/or
+phases all barrels of the same color. Levels created by Dean Miller.
+</p>
+<div class="media-container"><video class="media" controls><source src="videos/switchbox-puzzle-1.webm"></video></div>
+
+</div>
+</div>
+</body>
+</html>
