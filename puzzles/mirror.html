@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <base href="https://puzzle-dungeon.github.io/">
-<link rel="canonical" href="https://puzzle-dungeon.github.io/puzzles/atomix.html">
+<link rel="canonical" href="https://puzzle-dungeon.github.io/puzzles/mirror.html">
 <meta charset="UTF-8">
 <meta name="description" content="Puzzle Dungeon is a cell-based puzzle game.
-	Page: Puzzles - atomix">
+	Page: Puzzles - mirror">
 <meta name="keywords" content="puzzles, puzzle game, dungeon,
 	atomix, stoneage, chip challenge,
 	sokoban, sokoban solver, sokoban generator,
@@ -25,7 +25,7 @@
 	switchbox puzzle,
 	puzzle dungeon">
 <link rel="icon" type="image/png" href="images/ancient2/portal.png">
-<title>Puzzle Dungeon - Puzzles - atomix</title>
+<title>Puzzle Dungeon - Puzzles - mirror</title>
 <style>
 html {
 	height: 100%;
@@ -385,7 +385,7 @@ pre.highlight  {
 </div>
 <div id="sidebar">
 <a href="puzzles/"><button class="page">All Puzzles</button></a>
-<a href="puzzles/atomix.html"><button class="page current-page">atomix</button></a>
+<a href="puzzles/atomix.html"><button class="page">atomix</button></a>
 <a href="puzzles/barrel.html"><button class="page">barrel</button></a>
 <a href="puzzles/color.html"><button class="page">color</button></a>
 <a href="puzzles/fifteen.html"><button class="page">fifteen</button></a>
@@ -394,7 +394,7 @@ pre.highlight  {
 <a href="puzzles/lock.html"><button class="page">lock</button></a>
 <a href="puzzles/memory.html"><button class="page">memory</button></a>
 <a href="puzzles/minotaur.html"><button class="page">minotaur</button></a>
-<a href="puzzles/mirror.html"><button class="page">mirror</button></a>
+<a href="puzzles/mirror.html"><button class="page current-page">mirror</button></a>
 <a href="puzzles/portal.html"><button class="page">portal</button></a>
 <a href="puzzles/rotatepic.html"><button class="page">rotatepic</button></a>
 <a href="puzzles/stoneage.html"><button class="page">stoneage</button></a>
@@ -413,38 +413,71 @@ pre.highlight  {
 </div>
 </div>
 <div id="content">
-<h1>Atomix Puzzle</h1>
+<h1>Mirror Puzzle</h1>
 
 <div id="videos" class="all-medias">
 
 </div>
 <div id="screenshots" class="all-medias">
-<div class="media"><div class="media-title">Atomix generated Glycerin level</div><a href="screenshots/atomix-gen-glycerin.html"><img src="screenshots/atomix-gen-glycerin.webp"></a></div>
-<div class="media"><div class="media-title">Atomix generated Glycerin level (solved)</div><a href="screenshots/atomix-gen-glycerin-goal.html"><img src="screenshots/atomix-gen-glycerin-goal.webp"></a></div>
-<div class="media"><div class="media-title">Atomix original Glycerin level</div><a href="screenshots/atomix-orig-glycerin.html"><img src="screenshots/atomix-orig-glycerin.webp"></a></div>
-<div class="media"><div class="media-title">Atomix original Glycerin level (solved)</div><a href="screenshots/atomix-orig-glycerin-goal.html"><img src="screenshots/atomix-orig-glycerin-goal.webp"></a></div>
-<div class="media"><div class="media-title">Atomix generated bonus level</div><a href="screenshots/atomix-puzzle-1.html"><img src="screenshots/atomix-puzzle-1.webp"></a></div>
-<div class="media"><div class="media-title">Atomix generated bonus level (solved room)</div><a href="screenshots/atomix-puzzle-2.html"><img src="screenshots/atomix-puzzle-2.webp"></a></div>
-<div class="media"><div class="media-title">Atomix generated Ethanol level</div><a href="screenshots/atomix-puzzle-3.html"><img src="screenshots/atomix-puzzle-3.webp"></a></div>
-<div class="media"><div class="media-title">Atomix original Water level</div><a href="screenshots/atomix-puzzle-4.html"><img src="screenshots/atomix-puzzle-4.webp"></a></div>
+
 </div>
-<p>Atomix is a puzzle game where you construct complete molecules, ranging
-from simple to highly complex, by arranging isolated atoms scattered
-among walls and other obstacles.
+<p>You control how beams of light travel from a beam generator to a beam
+collector, using mirrors attached to movable or static objects. These
+mirrors reflect the beam in different ways, and may have limited or
+flipped activeness. Your objective is to arrange mirrors and possibly
+move or reconfigure them so that at least one part of the beam reaches
+the collector.
 </p>
 
-<p>When you push an atom in a direction, it moves until it collides with an
-object that halts its motion - this could be a wall or another atom. This
-mechanic makes Atomix challenging and engaging, as careful planning is
-required to organize your molecule correctly.
+<p>The beam is emitted from the generator in four directions: left, right,
+up, and down. Each direction of the beam proceeds cell by cell until it
+is reflected, redirected, or terminates. The beam continues through empty
+floor cells, void cells, glass, sand, open gates, trap cells, portals,
+and also through barrels, enemies, the character, and mirrors. It is
+terminated by walls and locks. If it enters a portal, it instantly
+appears at the paired portal in the same direction. Portals do not
+reflect or bypass; they relocate the beam to the peer.
 </p>
 
-<p>There are also bonus levels where the colored numbered atoms are used
-instead of the chemical atoms. The player must guess the correct number
-structure and arrange these atoms into it.
+<p>Mirrors are defined by their orientation, activeness and their carrier
+object. There are four mirror orientations:
 </p>
 
-<p class="goal">Build a complete molecule from atoms. Press Enter to select atoms.</p>
+<p>• Diagonal 1 (/): reflects left ↔ down and right ↔ up
+</p>
+
+<p>• Diagonal 2 (\): reflects left ↔ up and right ↔ down
+</p>
+
+<p>• Horizontal (-): reverses vertical direction (up ↔ down)
+</p>
+
+<p>• Vertical   (|): reverses horizontal direction (left ↔ right)
+</p>
+
+<p>Mirrors are active or inactive. An inactive mirror does not affect the
+beam at all - it continues straight. An active mirror reflects the beam
+according to the list above. Mirrors can also have flipped
+activeness: such mirrors are active the first time they are hit by a
+beam, but become inactive for that beam on subsequent hits (or vice
+versa).
+</p>
+
+<p>Each mirror is attached to one of three types of carriers:
+</p>
+
+<p>• Barrels: pushable by the character, move one cell per push on floor.
+</p>
+
+<p>• Carts: move on floor, one cell per player instruction, in 0, 1, 2, or 4
+directions depending on movement type.
+</p>
+
+<p>• Lifts: move across void, stopping at the first obstacle, by player
+instruction, with the same direction types as carts.
+</p>
+
+<p class="goal">Deliver at least one part of the beam using mirrors.</p>
 
 </div>
 </div>
