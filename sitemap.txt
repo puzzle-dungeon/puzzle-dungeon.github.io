@@ -40,10 +40,6 @@ https://puzzle-dungeon.github.io/images/default/char.png
 https://puzzle-dungeon.github.io/images/default/cloud.png
 https://puzzle-dungeon.github.io/images/default/crack.png
 https://puzzle-dungeon.github.io/images/default/cursor.png
-https://puzzle-dungeon.github.io/images/default/dird.png
-https://puzzle-dungeon.github.io/images/default/dirl.png
-https://puzzle-dungeon.github.io/images/default/dirr.png
-https://puzzle-dungeon.github.io/images/default/diru.png
 https://puzzle-dungeon.github.io/images/default/enemy.png
 https://puzzle-dungeon.github.io/images/default/finish.png
 https://puzzle-dungeon.github.io/images/default/floor_gray_frame.png
@@ -66,6 +62,10 @@ https://puzzle-dungeon.github.io/images/default/liftv.png
 https://puzzle-dungeon.github.io/images/default/lock1.png
 https://puzzle-dungeon.github.io/images/default/lock2.png
 https://puzzle-dungeon.github.io/images/default/might.png
+https://puzzle-dungeon.github.io/images/default/odird.png
+https://puzzle-dungeon.github.io/images/default/odirl.png
+https://puzzle-dungeon.github.io/images/default/odirr.png
+https://puzzle-dungeon.github.io/images/default/odiru.png
 https://puzzle-dungeon.github.io/images/default/plate.png
 https://puzzle-dungeon.github.io/images/default/portal.png
 https://puzzle-dungeon.github.io/images/default/rocks.png
@@ -88,6 +88,7 @@ https://puzzle-dungeon.github.io/images/minecraft/gate1.png
 https://puzzle-dungeon.github.io/images/minecraft/plate.png
 https://puzzle-dungeon.github.io/images/minecraft/portal.png
 https://puzzle-dungeon.github.io/images/minecraft/rocks.png
+https://puzzle-dungeon.github.io/images/minecraft/sand.png
 https://puzzle-dungeon.github.io/images/minecraft/wall.png
 https://puzzle-dungeon.github.io/images/minotaur.png
 https://puzzle-dungeon.github.io/images/modern1/barrel.png
@@ -275,6 +276,7 @@ https://puzzle-dungeon.github.io/puzzles/hero.html
 https://puzzle-dungeon.github.io/puzzles/lock.html
 https://puzzle-dungeon.github.io/puzzles/memory.html
 https://puzzle-dungeon.github.io/puzzles/minotaur.html
+https://puzzle-dungeon.github.io/puzzles/mirror.html
 https://puzzle-dungeon.github.io/puzzles/portal.html
 https://puzzle-dungeon.github.io/puzzles/rotatepic.html
 https://puzzle-dungeon.github.io/puzzles/stoneage.html
