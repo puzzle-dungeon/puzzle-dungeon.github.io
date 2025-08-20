@@ -478,6 +478,8 @@ https://puzzle-dungeon.github.io/tutorials/switchbox-puzzle-mario.webp
 https://puzzle-dungeon.github.io/videos/
 https://puzzle-dungeon.github.io/videos/minotaur-puzzle-1.html
 https://puzzle-dungeon.github.io/videos/minotaur-puzzle-1.webm
+https://puzzle-dungeon.github.io/videos/mirror-puzzle-1.html
+https://puzzle-dungeon.github.io/videos/mirror-puzzle-1.webm
 https://puzzle-dungeon.github.io/videos/stoneage-puzzle-1.html
 https://puzzle-dungeon.github.io/videos/stoneage-puzzle-1.webm
 https://puzzle-dungeon.github.io/videos/switchbox-puzzle-1.html
