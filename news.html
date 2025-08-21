@@ -416,6 +416,64 @@ pre.highlight  {
 <div id="content">
 <h1>Latest News</h1>
 
+<h2>Version 0.3.0 - 2025-08-21</h2>
+<ul>
+	<li>Improved Windows support:<ul>
+		<li>New install-deps.bat to check for and install missing dependencies.</li>
+		<li>dungeon.bat now prompts you to run install-deps.bat if needed.</li>
+	</ul></li>
+	<li>Level collections<ul>
+		<li>Introduced named collections that contain actual levels.</li>
+		<li>Main Screen now shows collection plates in the maze; press</li>
+	</ul></li>
+	<li>Command line support<ul>
+		<li>New command line options for Unix and Windows, see: dungeon --help.</li>
+		<li>Implemented: --level N, --collection NAME, --list-collections.</li>
+	</ul></li>
+	<li>Solution system<ul>
+		<li>Solutions now include notions of 'push' and 'press-cell' primitives.</li>
+		<li>Solutions are summarized as: N moves, N pushes, N presses, N targets.</li>
+	</ul></li>
+	<li>New Mirror Puzzle<ul>
+		<li>Reflect beam from generator to collector using mirrors.</li>
+		<li>Mirrors are static or moveable, attached to barrels, lifts, carts.</li>
+		<li>Mirrors may be rotatable or have a fixed orientation.</li>
+		<li>Mirrors may be activated or deactivated, or have fixed activeness.</li>
+		<li>Walls, closed gates and locks stop the beam; portals relocate it.</li>
+	</ul></li>
+	<li>New actors and map cell types<ul>
+		<li>Cart: like lift, but slides by 1 cell on floor in 4 directions,</li>
+		<li>Mirrors attached to barrels, carts, or lifts.</li>
+		<li>New map cells: glass (an obstacle that passes the beam), traps,</li>
+	</ul></li>
+	<li>Themes<ul>
+		<li>Added variants of mirrors and all new cell types across themes.</li>
+		<li>Added beam image for clipping, currently identical across themes.</li>
+		<li>The minecraft theme is now quite complete and pleasing.</li>
+		<li>New character and enemy images in moss theme (druid and troll).</li>
+	</ul></li>
+	<li>GatePuzzle now supports traps:<ul>
+		<li>Traps are like gates with reversed meaning; toggled by plates.</li>
+		<li>The character dies when stepping on non-disarmed trap.</li>
+		<li>Added one GatePuzzle level demonstrating traps in place of gates.</li>
+	</ul></li>
+	<li>BarrelPuzzle improvements:<ul>
+		<li>Auto-detect Sokoban Zero-Space type B (ZSB) levels.</li>
+		<li>Generate ZSB levels of given size when "zsb" flag is set in config.</li>
+		<li>Optimize solution for ZSB levels using double-push.</li>
+		<li>Fix and improve solution in many level configurations.</li>
+		<li>Fix solution when not at level start (after pushes).</li>
+	</ul></li>
+	<li>Clipboard support<ul>
+		<li>RShift-D now copies the current map to the clipboard too.</li>
+		<li>The solution string (on KP-Enter) is also copied to the clipboard.</li>
+	</ul></li>
+	<li>The actor selected by the cursor is now highlighted for clarity.</li>
+	<li>The native map format now supports portals and mirrors (with metadata).</li>
+	<li>Solution speed can now be changed with the mouse wheel or PgUp/PgDown keys.</li>
+	<li>Update web site with Mirror Puzzle info, controls, video and screenshots.</li>
+</ul>
+
 <h2>Version 0.2.1 - 2025-06-13</h2>
 <ul>
 	<li>Fix Windows compatibility<ul>

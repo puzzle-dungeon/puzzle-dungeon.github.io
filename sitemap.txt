@@ -91,6 +91,7 @@ https://puzzle-dungeon.github.io/images/default/trap0.png
 https://puzzle-dungeon.github.io/images/default/trap1.png
 https://puzzle-dungeon.github.io/images/default/wall.png
 https://puzzle-dungeon.github.io/images/dinosaur.png
+https://puzzle-dungeon.github.io/images/druid.png
 https://puzzle-dungeon.github.io/images/minecraft/barrel.png
 https://puzzle-dungeon.github.io/images/minecraft/beamcl.png
 https://puzzle-dungeon.github.io/images/minecraft/beamgn.png
@@ -113,6 +114,8 @@ https://puzzle-dungeon.github.io/images/minecraft/trap1.png
 https://puzzle-dungeon.github.io/images/minecraft/wall.png
 https://puzzle-dungeon.github.io/images/minotaur.png
 https://puzzle-dungeon.github.io/images/modern1/barrel.png
+https://puzzle-dungeon.github.io/images/modern1/beamcl.png
+https://puzzle-dungeon.github.io/images/modern1/beamgn.png
 https://puzzle-dungeon.github.io/images/modern1/bones.png
 https://puzzle-dungeon.github.io/images/modern1/cloud.png
 https://puzzle-dungeon.github.io/images/modern1/crack.png
@@ -132,7 +135,9 @@ https://puzzle-dungeon.github.io/images/modern2/floor.png
 https://puzzle-dungeon.github.io/images/modern2/glass.png
 https://puzzle-dungeon.github.io/images/modern2/status.png
 https://puzzle-dungeon.github.io/images/modern2/wall.png
+https://puzzle-dungeon.github.io/images/moss/char.png
 https://puzzle-dungeon.github.io/images/moss/cloud.png
+https://puzzle-dungeon.github.io/images/moss/enemy.png
 https://puzzle-dungeon.github.io/images/moss/finish.png
 https://puzzle-dungeon.github.io/images/moss/floor.png
 https://puzzle-dungeon.github.io/images/moss/mirror.png
@@ -287,6 +292,7 @@ https://puzzle-dungeon.github.io/images/stoneage5/status.png
 https://puzzle-dungeon.github.io/images/stoneage5/wall.png
 https://puzzle-dungeon.github.io/images/theseus.png
 https://puzzle-dungeon.github.io/images/transparent.png
+https://puzzle-dungeon.github.io/images/troll.png
 https://puzzle-dungeon.github.io/images/viking.png
 https://puzzle-dungeon.github.io/images/yeti.png
 https://puzzle-dungeon.github.io/news.html
