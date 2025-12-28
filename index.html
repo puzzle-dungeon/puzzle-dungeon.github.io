@@ -165,7 +165,7 @@ a {
 	text-align: center;
 }
 
-#content code {
+#content > code {
 	display: block;
 	padding: 10px;
 	backdrop-filter: contrast(60%);
@@ -393,6 +393,7 @@ pre.highlight  {
 <a href="./"><button class="page current-page">About</button></a>
 <a href="news.html"><button class="page">News</button></a>
 <a href="download.html"><button class="page">Download</button></a>
+<a href="sokobansolver.html"><button class="page">Sokoban Solver</button></a>
 <a href="resources.html"><button class="page">Resources</button></a>
 <a href="authors.html"><button class="page">Authors</button></a>
 <hr>
@@ -447,7 +448,7 @@ generated or pre-created.</p></li>
 time-limited, others require strict adherence to rules, and many involve
 finding a path to the finish. Some levels even feature enemy
 encounters.</p></li>
-<li><p><strong>Customizable Themes</strong>: The game includes 13
+<li><p><strong>Customizable Themes</strong>: The game includes 15
 themes, well suited for different puzzle types.</p></li>
 <li><p><strong>Multilingual Support</strong>: The game is primarily in
 English, with partial translations available in several other
@@ -465,6 +466,8 @@ effects can be toggled on or off.</p></li>
 <li>modern1, modern2</li>
 <li>minecraft</li>
 <li>moss</li>
+<li>jewel</li>
+<li>cargo</li>
 <li>stoneage1, stoneage2, stoneage3, stoneage4, stoneage5</li>
 </ul>
 <h2 id="static-cells">Static cells</h2>
@@ -577,24 +580,32 @@ floor collectibles</h2>
 <td>Toggle move animation</td>
 </tr>
 <tr class="even">
+<td>q</td>
+<td>Quit game</td>
+</tr>
+<tr class="odd">
 <td>w</td>
 <td>Win the level (cheating)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Space</td>
 <td>Press cell, force teleport and more</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Enter</td>
 <td>Activate cursor</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Esc</td>
 <td>Exit to the main screen</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>KP-Enter</td>
 <td>Find solution, then replay it</td>
+</tr>
+<tr class="even">
+<td>Backspace</td>
+<td>Unset prepared solution if any</td>
 </tr>
 <tr class="odd">
 <td>RShift-E</td>
@@ -613,8 +624,8 @@ floor collectibles</h2>
 <td>Enabled/disabled show title and goal</td>
 </tr>
 <tr class="odd">
-<td>RShift-D</td>
-<td>Print current map</td>
+<td>RShift-M</td>
+<td>Print current map + copy to clipboard</td>
 </tr>
 <tr class="even">
 <td>Home</td>
@@ -643,6 +654,102 @@ floor collectibles</h2>
 <tr class="even">
 <td>Ctrl-Escape</td>
 <td>Display Pygame Console if available</td>
+</tr>
+<tr class="odd">
+<td>Alt-E</td>
+<td>Reload with toggled reverse-barrel-mode</td>
+</tr>
+<tr class="even">
+<td>Alt-C</td>
+<td>Load custom collection levels from clipboard</td>
+</tr>
+<tr class="odd">
+<td>Alt-S</td>
+<td>Load solution from clipboard</td>
+</tr>
+</tbody>
+</table>
+<h2 id="controls-for-barrelpuzzle-sokoban-solver">Controls for
+BarrelPuzzle (Sokoban) solver</h2>
+<table>
+<thead>
+<tr class="header">
+<th>key</th>
+<th>action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RAlt-1</td>
+<td>Toggle return-first solution</td>
+</tr>
+<tr class="even">
+<td>RAlt-A</td>
+<td>Use A* algorithm</td>
+</tr>
+<tr class="odd">
+<td>RAlt-B</td>
+<td>Use BFS algorithm</td>
+</tr>
+<tr class="even">
+<td>RAlt-D</td>
+<td>Use DFS algorithm</td>
+</tr>
+<tr class="odd">
+<td>RAlt-G</td>
+<td>Use Greedy algorithm</td>
+</tr>
+<tr class="even">
+<td>RAlt-U</td>
+<td>Use USC (Uniform) algorithm</td>
+</tr>
+<tr class="odd">
+<td>RAlt-0</td>
+<td>Disable reporting every second</td>
+</tr>
+<tr class="even">
+<td>RAlt–</td>
+<td>Disable preparing costs (debug only)</td>
+</tr>
+<tr class="odd">
+<td>KP-Enter</td>
+<td>Find push optimal solution</td>
+</tr>
+<tr class="even">
+<td>Shift-KP-Enter</td>
+<td>Find move optimal solution</td>
+</tr>
+<tr class="odd">
+<td>Backspace</td>
+<td>Stop finding or playing solution, or unset solution</td>
+</tr>
+</tbody>
+</table>
+<h2 id="controls-when-replaying-any-solution">Controls when replaying
+any solution</h2>
+<table>
+<thead>
+<tr class="header">
+<th>mouse button</th>
+<th>key</th>
+<th>action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>4 (wheel)</td>
+<td>PgUp</td>
+<td>Speed up replay</td>
+</tr>
+<tr class="even">
+<td>5 (wheel)</td>
+<td>PgDown</td>
+<td>Speed down replay</td>
+</tr>
+<tr class="odd">
+<td>1 or 3</td>
+<td>Backspace</td>
+<td>Stop playing solution</td>
 </tr>
 </tbody>
 </table>
@@ -685,6 +792,34 @@ floor collectibles</h2>
 <td>-</td>
 <td>Shift-Delete</td>
 <td>Reset all mirrors</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mouse-controls-for-various-puzzles">Mouse controls for various
+puzzles</h2>
+<table>
+<thead>
+<tr class="header">
+<th>mouse button</th>
+<th>action</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Go to the neighbour cell, if applicable</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Undo, if applicable</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Go to the selected cell, if applicable</td>
+<td></td>
 </tr>
 </tbody>
 </table>
