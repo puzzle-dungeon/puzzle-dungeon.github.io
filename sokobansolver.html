@@ -349,8 +349,13 @@ p.goal:before {
 	color: #ffffa0;
 }
 
-div.media-container {
+.media-container {
 	padding: 1px;
+	width: 100%;
+	text-align: center;
+}
+
+p:has(.media-container) {
 	width: 100%;
 	text-align: center;
 }
@@ -393,6 +398,8 @@ pre.highlight  {
 <a href="./"><button class="page">About</button></a>
 <a href="news.html"><button class="page">News</button></a>
 <a href="download.html"><button class="page">Download</button></a>
+<a href="dungeon.html"><button class="page">dungeon <i>(tool)</i></button></a>
+<a href="sokodun.html"><button class="page">sokodun <i>(tool)</i></button></a>
 <a href="sokobansolver.html"><button class="page current-page">Sokoban Solver</button></a>
 <a href="resources.html"><button class="page">Resources</button></a>
 <a href="authors.html"><button class="page">Authors</button></a>
@@ -418,17 +425,19 @@ pre.highlight  {
 <h1 id="sokoban-solver-in-puzzle-dungeon">Sokoban Solver in Puzzle
 Dungeon</h1>
 <h2 id="overview">Overview</h2>
-<p>Puzzle Dungeon includes a full-featured Sokoban solver that is nicely
-integrated with both the graphical game <a
+<p>Puzzle Dungeon includes a full-featured Sokoban solver that is
+tightly integrated with both the graphical game <a
 href="dungeon.html">dungeon</a> and the command-line tool <a
 href="sokodun.html">sokodun</a>.</p>
+<p>The code is Free Software, and should run on GNU/Linux, Windows,
+MacOS.</p>
 <p>The solver is implemented entirely in Python, follows classical
-search theory, and its correctness and optimality are confirmed by
+search theory, and its correctness and optimality are validated by
 comprehensive automated tests.</p>
-<p>The solver is designed primarily for small maps, and in some cases
-medium-sized maps. It prioritizes correctness, flexibility, and clarity
-over raw performance, although a considerable number of domain-specific
-and python-specific optimizations are present.</p>
+<p>It works well for small maps, and in some cases medium-sized maps. It
+prioritizes correctness, flexibility, and clarity over raw performance,
+although a considerable number of domain-specific and python-specific
+optimizations are present.</p>
 <h2 id="supported-search-algorithms">Supported Search Algorithms</h2>
 <p>The solver supports multiple classical graph search algorithms,
 selectable at runtime:</p>
@@ -445,11 +454,11 @@ remaining cost) to guide the search and find optimal solutions.</p></li>
 <li><p><strong>Greedy Best-First Search</strong><br />
 Uses the same heuristics as A* but prioritizes estimated remaining cost.
 Optimality is not guaranteed, but solutions are often found
-quicker.</p></li>
+faster.</p></li>
 <li><p><strong>Depth-First Search (DFS)</strong><br />
 Non-optimal and primarily useful for experimentation and debugging. May
-use less memory, but has own artifacts. It is actually IDDFS with depth
-step.</p></li>
+use less memory, but has its own artifacts. It is implemented as IDDFS
+with a depth step.</p></li>
 </ul>
 <p>The optimality of BFS, UCS, and A* is confirmed by comprehensive
 tests across different level classes.</p>
@@ -465,8 +474,8 @@ Minimize the number of shifts (pushes or pulls), with moves as a
 secondary metric.</p></li>
 </ul>
 <p>All costs are represented uniformly as a <strong>lexicographic
-pair</strong> <strong>(num_moves, num_shifts)</strong>. This applies
-consistently to path costs, lower-bound estimates, and solution
+pair</strong> <em>(num_moves, num_shifts)</em>. This representation is
+used consistently for path costs, lower-bound estimates, and solution
 costs.</p>
 <h2 id="solver-architecture">Solver Architecture</h2>
 <p>The <strong>Position</strong> (search node) represents a unique
@@ -474,7 +483,7 @@ combination of the character location and all barrel locations.</p>
 <p>Barrel locations are stored in a <strong>SuperPosition</strong>
 object. A Position is one character placement within its super-position.
 This allows multiple character states to share properties of the same
-barrel configuration, like:</p>
+barrel configuration, such as:</p>
 <ul>
 <li>solved / dead status,</li>
 <li>lower-bound path cost and solution estimation,</li>
@@ -483,7 +492,7 @@ barrel configuration, like:</p>
 <p>Other properties are stored per Position, including:</p>
 <ul>
 <li>parent pointer,</li>
-<li>edge-specific costs (own_nums),</li>
+<li>edge-specific cost (own_nums),</li>
 <li>accumulated path cost (total_nums),</li>
 <li>child edge information (when needed for edge relaxation).</li>
 </ul>
@@ -495,7 +504,7 @@ cost improves.</p>
 <h2 id="heuristics-and-lower-bounds">Heuristics and Lower Bounds</h2>
 <p>All search algorithms benefit from prepared domain-specific data:</p>
 <ul>
-<li><p><strong>Dead-cell detection</strong><br />
+<li><p><strong>Dead cells</strong><br />
 Cells where a barrel can never participate in a solution are detected
 upfront and excluded.</p></li>
 <li><p><strong>Precomputed costs</strong></p>
@@ -522,7 +531,8 @@ first solution found is optimal.</p>
 <li>By moves: optimality is ensured via sorting and edge
 relaxation.</li>
 </ul>
-<p>Preparation can be disabled for experimentation or benchmarking.</p>
+<p>Prepared data can be disabled for experimentation or
+benchmarking.</p>
 <h2 id="special-level-support">Special Level Support</h2>
 <p>The solver supports several special Sokoban level classes:</p>
 <ul>
@@ -541,15 +551,30 @@ pushing. Shifts become pulls at the grid level; the solver logic itself
 remains unchanged. The character position is currently unchanged, which
 makes some puzzles unsolvable in this mode. The proper fix is to change
 the initial character location according to the solution in forward
-(push) mode if known.</p></li>
+(push) mode, if known.</p></li>
+</ul>
+<h2 id="deadlock-detection">Deadlock Detection</h2>
+<p>The following types of deadlocks are detected:</p>
+<ul>
+<li>simple local deadlocks (for example, 2x2 patterns),</li>
+<li>dynamic match deadlocks (barrel-to-plate assignment via
+Hungarian),</li>
+<li>freeze deadlocks (barrels form zigzag between walls, block each
+other),</li>
+<li>corral freeze deadlock (corrals with no valid barrel pushes to
+open).</li>
 </ul>
 <h2 id="solver-design-highlights">Solver Design Highlights</h2>
 <ul>
+<li>Support for a wide range of Sokoban level variants.</li>
+<li>Support for move-optimal and push-optimal solutions.</li>
+<li>Support for forward and reverse modes.</li>
+<li>Detection of multiple local and dynamic deadlock types.</li>
 <li>Explicit state graph with reopening support.</li>
 <li>Correct edge relaxation and state reparenting.</li>
+<li>Clear separation between algorithm, cost model, and heuristics.</li>
 <li>Unified solver core for GUI and CLI.</li>
 <li>Extensive regression tests.</li>
-<li>Clear separation between algorithm, cost model, and heuristics.</li>
 <li>Optional return-first mode, trading optimality for speed.</li>
 </ul>
 <h2 id="incremental-solving-and-budgeting">Incremental Solving and
@@ -560,20 +585,191 @@ Budgeting</h2>
 <li>Progress messages are emitted.</li>
 <li>Solving can resume from the interruption point.</li>
 </ul>
-<p>This behavior is used by both the GUI and the command-line tool and
-can be disabled.</p>
+<p>This report-progress behavior is used by both the GUI and the
+command-line tool and can be disabled.</p>
+<h2 id="special-debug-flags">Special Debug Flags</h2>
+<p>Both the graphical game <a href="dungeon.html">dungeon</a> and the
+command-line tool <a href="sokodun.html">sokodun</a> support the
+following <em>-d FEATURE</em> (or <em>–debug FEATURE</em>) flags:</p>
+<ul>
+<li><em><code>prun</code></em> - report prune, deadlock and solution
+counters every second</li>
+<li><em><code>nofd</code></em> - disable detection of Freeze
+deadlocks</li>
+<li><em><code>nocd</code></em> - disable detection of Corral Freeze
+deadlocks</li>
+<li><em><code>dlck</code></em> - display all Match, Freeze and Corral
+Freeze deadlocks</li>
+<li><em><code>sevt</code></em> - dump SokobanSolver event log (floody;
+redirect to *.sel file)</li>
+<li><em><code>solv</code></em>, <em><code>solv+</code></em>,
+<em><code>solv++</code></em> - dump position processing log
+(floody)</li>
+<li><em><code>prevalid</code></em> - dump prepared valid shift data per
+level</li>
+<li><em><code>precosts</code></em>, <em><code>precosts+</code></em> -
+dump prepared costs data per level</li>
+</ul>
+<p>These feature flags are handled by SokobanSolver itself, either
+changing behaviour or writing relevant output to stdout. Multiple flags
+may be specified using separate -d options.</p>
+<p>There is no way to disable detection of Match (or Bipartite)
+deadlocks. By design, the costs and valid shifts do not make sense for
+mismatched board positions (for which there is no perfect
+barrel-to-plate matching). So such Position object is just never
+created; this can’t be disabled.</p>
+<h2 id="gui-vs-cli-keys-and-options">GUI vs CLI, Keys and Options</h2>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>GUI key</th>
+<th>CLI option</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RCtrl-1</td>
+<td><code>-1</code></td>
+<td>Toggle return-first solution mode</td>
+</tr>
+<tr class="even">
+<td>RCtrl-A</td>
+<td><code>-A</code></td>
+<td>Use A* algorithm</td>
+</tr>
+<tr class="odd">
+<td>RCtrl-B</td>
+<td><code>-B</code></td>
+<td>Use BFS algorithm</td>
+</tr>
+<tr class="even">
+<td>RCtrl-D</td>
+<td><code>-D</code></td>
+<td>Use DFS algorithm</td>
+</tr>
+<tr class="odd">
+<td>RCtrl-G</td>
+<td><code>-G</code></td>
+<td>Use Greedy algorithm</td>
+</tr>
+<tr class="even">
+<td>RCtrl-U</td>
+<td><code>-U</code></td>
+<td>Use UCS (Uniform Cost) algorithm</td>
+</tr>
+<tr class="odd">
+<td>RCtrl-0</td>
+<td><code>-0</code></td>
+<td>Disable periodic progress reporting</td>
+</tr>
+<tr class="even">
+<td>RCtrl--</td>
+<td><code>-_</code></td>
+<td>Disable cost and valid shift preparation (debug only)</td>
+</tr>
+<tr class="odd">
+<td>KP_Enter</td>
+<td>default</td>
+<td>Find a push optimal solution</td>
+</tr>
+<tr class="even">
+<td>Shift-KP_Enter</td>
+<td><code>-m</code></td>
+<td>Find a move optimal solution</td>
+</tr>
+<tr class="odd">
+<td>Backspace</td>
+<td><em>Ctrl-C</em> or N/A</td>
+<td>Stop solving or playing a solution, or unset the solution</td>
+</tr>
+<tr class="even">
+<td>RCtrl-Tab</td>
+<td>N/A</td>
+<td>Show the most recently created position while solving</td>
+</tr>
+<tr class="odd">
+<td>RCtrl-Backquote</td>
+<td>N/A</td>
+<td>Show the most recently detected deadlock while solving</td>
+</tr>
+<tr class="even">
+<td>Alt-R</td>
+<td>N/A</td>
+<td>Reload level (guaranteed same map unlike plain <em>r</em>)</td>
+</tr>
+<tr class="odd">
+<td>Alt-E</td>
+<td>N/A</td>
+<td>Reload level with toggled reverse-barrel mode</td>
+</tr>
+<tr class="even">
+<td>Alt-C</td>
+<td>N/A</td>
+<td>Load custom collection levels from the clipboard</td>
+</tr>
+<tr class="odd">
+<td>Alt-S</td>
+<td>N/A</td>
+<td>Load a solution from the clipboard</td>
+</tr>
+</tbody>
+</table>
+<p>In both GUI and CLI modes, levels may be loaded from the clipboard or
+standard input using <code>clipboard:</code> or <code>stdin:</code> or
+<code>-</code> arguments, and all detected deadlocks may be dumped to
+standard output using <code>--debug dlck</code> option (this can be
+pretty floody).</p>
 <h2 id="performance-notes">Performance Notes</h2>
 <p>This is possibly the most complete Sokoban solver implemented in
 Python.</p>
-<p>It is slower than some specialized solvers because:</p>
+<p>It may be much slower than some specialized solvers because:</p>
 <ul>
-<li>it is written in Python,</li>
-<li>corral pruning and some advanced heuristics are not yet
-implemented.</li>
+<li>it is written in the high-level Python language,</li>
+<li>advanced corral based heuristics are not yet implemented.</li>
 </ul>
-<p>Despite this, it is well suited for Puzzle Dungeon gameplay, testing,
-and provides a solid foundation for tooling, research, and further
-optimization.</p>
+<p>A typical Sokoban level contains many millions of unique positions.
+Currently the solver keeps all visited positions and never removes them
+while solving. It would be much slower without this permanent cache.</p>
+<p>There is no memory management yet. It will eventually fill all
+available memory. The operating system may kill the process, but this
+can freeze the computing unit. Therefore, remember to stop the process
+(by pressing <em>Ctrl-C</em> in the CLI or any button like
+<em>Space</em> in the GUI), or limit it by time (“-T 600” limits
+execution to 10 minutes in the CLI). Garbage collection takes time, so
+please be patient after using lots of memory.</p>
+<p>You can run the solver on large levels to observe where it gets
+stuck, but do not leave it running for too long. It is recomended to
+always start with return-first Greedy mode (specify “sokodun -1” or
+press <em>RCtrl-1</em> in the GUI). Once it finds a return-first
+solution in reasonable time, you may attempt to solve it using BFS, A*
+or USC (<em>-B</em>, <em>-A</em>, <em>-U</em> with optional <em>-m</em>
+in the CLI, or <em>RCtrl-{B,A,U}</em> followed by <em>KP_Enter</em> or
+<em>Shift-KP_Enter</em> in the GUI) to find a push-optimal or
+move-optimal solution.</p>
+<p>If the solution does not progress quickly for Greedy or A<em>, this
+can mean some non-trivial deadlock was not detected, and expanding a
+deadlocked position is costy. Press </em>RCtrl-Backquote* in the GUI to
+see the last discovered dynamic deadlock. Press <em>RCtrl-Tab</em> (any
+number of times) to see the last created position; if it contains an
+undetected deadlock, this can explain long processing times.</p>
+<p>Despite performance limitations, this Sokoban solver is well suited
+for Puzzle Dungeon gameplay, testing, and provides a solid foundation
+for tooling, research, and further optimization.</p>
+<h2 id="validity-of-solutions">Validity of Solutions</h2>
+<p>There are comprehensive tests. If you discover any anomaly, like a
+non-optimal solution for a letslogic level using BFS or A*, or a
+“Solution not found” result, please report such exotic cases. They can
+then be fixed, added to tests, and prevented from recurring.</p>
+<p>If the minimal solution depth (number of pushes) is determined to be
+larger than 500, the solution is currently reported immediately as “not
+found”. This limitation may be removed in the future.</p>
+<p>Enjoy!</p>
 
 </div>
 </div>

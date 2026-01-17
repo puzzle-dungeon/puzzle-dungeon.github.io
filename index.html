@@ -349,8 +349,13 @@ p.goal:before {
 	color: #ffffa0;
 }
 
-div.media-container {
+.media-container {
 	padding: 1px;
+	width: 100%;
+	text-align: center;
+}
+
+p:has(.media-container) {
 	width: 100%;
 	text-align: center;
 }
@@ -393,6 +398,8 @@ pre.highlight  {
 <a href="./"><button class="page current-page">About</button></a>
 <a href="news.html"><button class="page">News</button></a>
 <a href="download.html"><button class="page">Download</button></a>
+<a href="dungeon.html"><button class="page">dungeon <i>(tool)</i></button></a>
+<a href="sokodun.html"><button class="page">sokodun <i>(tool)</i></button></a>
 <a href="sokobansolver.html"><button class="page">Sokoban Solver</button></a>
 <a href="resources.html"><button class="page">Resources</button></a>
 <a href="authors.html"><button class="page">Authors</button></a>
@@ -600,8 +607,8 @@ floor collectibles</h2>
 <td>Exit to the main screen</td>
 </tr>
 <tr class="odd">
-<td>KP-Enter</td>
-<td>Find solution, then replay it</td>
+<td>KP_Enter</td>
+<td>Find a solution, then replay it</td>
 </tr>
 <tr class="even">
 <td>Backspace</td>
@@ -656,16 +663,20 @@ floor collectibles</h2>
 <td>Display Pygame Console if available</td>
 </tr>
 <tr class="odd">
-<td>Alt-E</td>
-<td>Reload with toggled reverse-barrel-mode</td>
+<td>Alt-R</td>
+<td>Reload level (guaranteed same map unlike plain <em>r</em>)</td>
 </tr>
 <tr class="even">
-<td>Alt-C</td>
-<td>Load custom collection levels from clipboard</td>
+<td>Alt-E</td>
+<td>Reload level with toggled reverse-barrel mode</td>
 </tr>
 <tr class="odd">
+<td>Alt-C</td>
+<td>Load custom collection levels from the clipboard</td>
+</tr>
+<tr class="even">
 <td>Alt-S</td>
-<td>Load solution from clipboard</td>
+<td>Load a solution from the clipboard</td>
 </tr>
 </tbody>
 </table>
@@ -680,51 +691,61 @@ BarrelPuzzle (Sokoban) solver</h2>
 </thead>
 <tbody>
 <tr class="odd">
-<td>RAlt-1</td>
-<td>Toggle return-first solution</td>
+<td>RCtrl-1</td>
+<td>Toggle return-first solution mode</td>
 </tr>
 <tr class="even">
-<td>RAlt-A</td>
+<td>RCtrl-A</td>
 <td>Use A* algorithm</td>
 </tr>
 <tr class="odd">
-<td>RAlt-B</td>
+<td>RCtrl-B</td>
 <td>Use BFS algorithm</td>
 </tr>
 <tr class="even">
-<td>RAlt-D</td>
+<td>RCtrl-D</td>
 <td>Use DFS algorithm</td>
 </tr>
 <tr class="odd">
-<td>RAlt-G</td>
+<td>RCtrl-G</td>
 <td>Use Greedy algorithm</td>
 </tr>
 <tr class="even">
-<td>RAlt-U</td>
-<td>Use USC (Uniform) algorithm</td>
+<td>RCtrl-U</td>
+<td>Use UCS (Uniform Cost) algorithm</td>
 </tr>
 <tr class="odd">
-<td>RAlt-0</td>
-<td>Disable reporting every second</td>
+<td>RCtrl-0</td>
+<td>Disable periodic progress reporting</td>
 </tr>
 <tr class="even">
-<td>RAlt–</td>
-<td>Disable preparing costs (debug only)</td>
+<td>RCtrl--</td>
+<td>Disable cost and valid shift preparation (debug only)</td>
 </tr>
 <tr class="odd">
-<td>KP-Enter</td>
-<td>Find push optimal solution</td>
+<td>KP_Enter</td>
+<td>Find a push optimal solution</td>
 </tr>
 <tr class="even">
-<td>Shift-KP-Enter</td>
-<td>Find move optimal solution</td>
+<td>Shift-KP_Enter</td>
+<td>Find a move optimal solution</td>
 </tr>
 <tr class="odd">
 <td>Backspace</td>
-<td>Stop finding or playing solution, or unset solution</td>
+<td>Stop solving or playing a solution, or unset the solution</td>
+</tr>
+<tr class="even">
+<td>RCtrl-Tab</td>
+<td>Show the most recently created position while solving</td>
+</tr>
+<tr class="odd">
+<td>RCtrl-Backquote</td>
+<td>Show the most recently detected deadlock while solving</td>
 </tr>
 </tbody>
 </table>
+<p>See dedicated <a href="sokobansolver.html">Sokoban Solver</a> page
+for more information.</p>
 <h2 id="controls-when-replaying-any-solution">Controls when replaying
 any solution</h2>
 <table>
@@ -843,6 +864,8 @@ class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="
 <p>On Windows, run <strong>dungeon.bat</strong>.</p>
 <p>On Unix systems, you may optionally install it using “make
 install”.</p>
+<p>See <a href="dungeon.html">dungeon</a> page for complete information
+about options and arguments.</p>
 <h2 id="puzzles">Puzzles</h2>
 <h3 id="atomix-puzzle">Atomix Puzzle</h3>
 <p>Atomix is a puzzle game where you construct complete molecules,
