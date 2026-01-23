@@ -190,6 +190,31 @@ a {
 	color: rgb(220, 110, 110);
 }
 
+.news > li {
+	padding: 0px 0px 6px 0px;
+}
+
+.news > li:has(ul) {
+	font-weight: bold;
+}
+
+.news > li > ul {
+	margin: 2px 0px 0px 0px;
+	font-weight: normal;
+}
+
+.news > li > ul > li {
+	padding: 2px 0px 1px 0px;
+}
+
+.news > li > ul > li > ul {
+	margin: 1px 0px 0px 0px;
+}
+
+.news > li > ul > li > ul > li {
+	padding: 1px 0px 0px 0px;
+}
+
 .puzzle-entry {
 	display: flex;
 	justify-content: space-evenly;
@@ -424,19 +449,180 @@ pre.highlight  {
 <div id="content">
 <h1>Latest News</h1>
 
+<h2>Version 0.4.0 - 2026-01-23</h2>
+<ul class="news">
+	<li>Redesign of Collections and Levels<ul>
+		<li>All levels now belong to collections, auto-registered at startup.</li>
+		<li>Collections are referred by string ID (path-like) or numeric ID.</li>
+		<li>Level ID format is COLLECTION-ID.LEVEL-INDEX, e.g. hero.2 or 13.2.</li>
+		<li>Collection configs use YAML and are stored in levels/ directory.</li>
+		<li>A special custom collection with ID 0 can be populated on startup.</li>
+		<li>Command line args and options configure the custom collection.</li>
+		<li>The custom collection can be recreated by clipboard import (Alt-C).</li>
+	</ul></li>
+	<li>Reworked Main Screen<ul>
+		<li>Main Screen shows all auto-registered and custom collections.</li>
+		<li>Easier navigation and better hints for collections to enter.</li>
+		<li>The custom collection is only shown on Main Screen when non empty.</li>
+	</ul></li>
+	<li>New Themes and Updates<ul>
+		<li><tt>jewel</tt> — suitable for Sokoban and many other puzzles (press F5).</li>
+		<li><tt>cargo</tt> — suitable for Sokoban and some other puzzles (press F6).</li>
+		<li>Reworked ancient1 theme, now it's green floor and yellow walls.</li>
+		<li>Improved plates and other images in several themes.</li>
+		<li>New keybindings Shift-F3 and Shift-F4 for ancient2 and modern2.</li>
+	</ul></li>
+	<li>Support for Various Level Arguments from Command Line<ul>
+		<li>Collection IDs, e.g. "stoneage/original".</li>
+		<li>Level IDs, e.g. "atomix/original.5".</li>
+		<li>Map files (Sokoban map files and internal maps auto-detected).</li>
+		<li>Clipboard input (map or URL supported): "clipboard:".</li>
+		<li>Standard input (map or URL supported): "stdin:" or "-".</li>
+		<li>Map files via URL, e.g. "https://url-shortener.me/5NTJ".</li>
+		<li>LetsLogic collection IDs ("letslogic:Micro Cosmos", letslogic:30).</li>
+		<li>LetsLogic level IDs (after loading their collection), see below.</li>
+	</ul></li>
+	<li>Support LetsLogic Sokoban Collections<ul>
+		<li>New flag --list-ll-collections shows all LetsLogic collections.</li>
+		<li>The LetsLogic collection list is cached locally for 1 week.</li>
+		<li>URL-like syntax: letslogic:&lt;coll-id-or-title&gt;, letslogic:/&lt;level-id&gt;.</li>
+		<li>Requested LetsLogic collections and all levels are cached locally.</li>
+		<li>Configurable LetsLogic API key (by default, generic acc is used).</li>
+		<li>Graceful handling and reporting of internet and server issues.</li>
+	</ul></li>
+	<li>New Sokoban Solver Highlights<ul>
+		<li>Supports classical search algorithms: BFS, UCS, A*, Greedy, DFS.</li>
+		<li>Two solution cost metrics:<ul>
+			<li>push/pull-optimal — minimize shifts then moves,</li>
+			<li>move-optimal — minimize moves then shifts.</li>
+		</ul></li>
+		<li>Unified solver core for GUI and CLI with extensive automated testing.</li>
+		<li>Solver architecture separates barrel configuration (SuperPosition)<br>and character state (Position) for efficiency.</li>
+		<li>Domain-specific heuristics with Hungarian matching and lower-bound<br>costs for A* and pruning.</li>
+		<li>Detects multiple deadlock types: local, match, freeze, corral freeze.</li>
+		<li>Supports special level classes: Circular, ZSB, reverse mode.</li>
+		<li>Periodic progress reports and optional early return.</li>
+	</ul></li>
+	<li>New <tt>sokodun</tt> Command-Line Tool<ul>
+		<li>Dedicated CLI for Sokoban solving using the same solver as the GUI.</li>
+		<li>Supports specifying multiple levels and collections on command line.</li>
+		<li>Allows algorithm selection: --astar, --bfs, --ucs, --greed, --dfs.</li>
+		<li>Supports solution types: push-optimal and move-optimal (--by-moves).</li>
+		<li>Return the first found solution with --return-first.</li>
+		<li>Time-limited solving via --limit-time.</li>
+		<li>Flexible output: visual vs standard map format (--show-sok),<br>dead cell highlighting (--show-dead), timing per level (--show-time).</li>
+		<li>Record comparison and control with --record-file.</li>
+		<li>Quiet and verbosity flags for automation workflows.</li>
+	</ul></li>
+	<li>Command Line and Configuration<ul>
+		<li>Unified startup option instead of --level and --collection:<ul>
+			<li><tt>-s, --start LEVEL-OR-COLL-ID</tt></li>
+		</ul></li>
+		<li>New custom collection options:<ul>
+			<li><tt>-t, --theme THEME</tt></li>
+			<li><tt>-m, --music MUSIC</tt></li>
+			<li><tt>-b, --bg-image BG_IMAGE</tt></li>
+			<li><tt>-P, --puzzle-type PUZZLE_TYPE</tt></li>
+			<li><tt>-c, --cloud-mode</tt></li>
+			<li><tt>-r, --reverse-barrel-mode</tt></li>
+		</ul></li>
+		<li>New options:<ul>
+			<li><tt>--list-ll-collections</tt></li>
+			<li><tt>-M, --no-music</tt></li>
+			<li><tt>-S, --no-sound</tt></li>
+			<li><tt>-p, --run-profiler</tt></li>
+			<li><tt>-d, --debug LVL-or-FEATURE</tt></li>
+		</ul></li>
+	</ul></li>
+	<li>New Debug Mechanism (via --debug option)<ul>
+		<li><tt>jreg</tt>, <tt>jprs</tt> — joystick debug registration/presses</li>
+		<li><tt>grid</tt>, <tt>grid+</tt> — grid subsystem output</li>
+		<li><tt>path</tt>, <tt>path+</tt> — pathfinding output</li>
+		<li><tt>solv</tt>, <tt>solv+</tt>, <tt>solv++</tt> — solver internals log (very verbose)</li>
+		<li><tt>szsb</tt>, <tt>szsb+</tt> — Sokoban ZSB output</li>
+		<li><tt>prun</tt> — periodic prune and deadlock counters</li>
+		<li><tt>nofd</tt> — disable Freeze deadlock detection</li>
+		<li><tt>nocd</tt> — disable Corral Freeze deadlock detection</li>
+		<li><tt>dlck</tt> — show all Match, Freeze, Corral Freeze deadlocks</li>
+		<li><tt>sevt</tt> — SokobanSolver event log (verbose; redirect to *.sel file)</li>
+		<li><tt>prevalid</tt> — SokibanSolver prepared valid shift data per level</li>
+		<li><tt>precosts</tt>, <tt>precosts+</tt> — SokibanSolver prepared costs per level</li>
+	</ul></li>
+	<li>New Modules<ul>
+		<li>celltools.py</li>
+		<li>collectiontools.py</li>
+		<li>colorize.py</li>
+		<li>grid.py</li>
+		<li>hungarian.py</li>
+		<li>level.py</li>
+		<li>load.py</li>
+		<li>processcmdargs.py</li>
+		<li>profiler.py</li>
+		<li>progressline.py</li>
+		<li>records.py</li>
+		<li>sokobansolver.py</li>
+		<li>testsuite.py</li>
+	</ul></li>
+	<li>New regression Tests<ul>
+		<li>tests/all</li>
+		<li>tests/celltools</li>
+		<li>tests/colorize</li>
+		<li>tests/grid</li>
+		<li>tests/hungarian</li>
+		<li>tests/progressline</li>
+		<li>tests/records</li>
+		<li>tests/sokobansolver</li>
+		<li>tests/sokobansolver-long</li>
+		<li>tests/teestream</li>
+		<li>tests/testsuite</li>
+	</ul></li>
+	<li>BarrelPuzzle (Sokoban) Enhancements<ul>
+		<li>Full support for reverse-barrel-mode (press Alt-E):<br>barrels and plates swapped; pulls instead of pushes.</li>
+		<li>Multiple solution controls via keyboard including algorithm:<br>RCtrl-1/A/B/D/G/U/0/-/Tab/Backquote.</li>
+		<li>KP_Enter — find push/pull optimal solution.</li>
+		<li>Shift-KP_Enter — find move optimal solution.</li>
+		<li>Solution progress updates at least once per second.</li>
+		<li>Solutions in LURD format (no spaces), copied to clipboard.</li>
+	</ul></li>
+	<li>Input Handling and UX<ul>
+		<li>Improved full-screen (F11 and Shift-F11), also fitting Ctrl-S.</li>
+		<li>Ignore lone Shift/Ctrl/Alt presses centrally.</li>
+		<li>Many keybindings no longer stop solution search or replay.</li>
+		<li>Reserve right Ctrl / right Alt combinations for puzzles.</li>
+		<li>Change RShift-D to RShift-M — copy current map to clipboard.</li>
+		<li>Backspace — clear prepared solution without reloading level.</li>
+		<li>Any key during solving marks stop_find, allowing early return.</li>
+		<li>Updated joystick profiles and error recovery.</li>
+		<li>Improved short status messages for common situations.</li>
+		<li>Import LURD-based solution from clipboard by Alt-S.</li>
+	</ul></li>
+	<li>Miscellaneous Fixes and Improvements<ul>
+		<li>Fix mirror flip drawing and other rendering issues.</li>
+		<li>Fix convert_outer_floors for all border floors.</li>
+		<li>Fix warnings when switching levels during kill-enemy animations.</li>
+		<li>Add actor facing modes (static, horizontal flip, rotate) and<br>use it for character and for enemy (in HeroPuzzle).</li>
+		<li>Improve level config error messages.</li>
+		<li>Fix GatePuzzle and LockPuzzle assert_config logic.</li>
+		<li>Auto-append .png in load_image for missing extensions.</li>
+		<li>Fix translated goal strings; allow recursive translation tokens.</li>
+		<li>Catch joystick disconnect errors cleanly.</li>
+		<li>Add cheat-mode (RShift-C) that allows pulls with Shifts and more.</li>
+	</ul></li>
+</ul>
+
 <h2>Version 0.3.0 - 2025-08-21</h2>
-<ul>
+<ul class="news">
 	<li>Improved Windows support:<ul>
 		<li>New install-deps.bat to check for and install missing dependencies.</li>
 		<li>dungeon.bat now prompts you to run install-deps.bat if needed.</li>
 	</ul></li>
 	<li>Level collections<ul>
 		<li>Introduced named collections that contain actual levels.</li>
-		<li>Main Screen now shows collection plates in the maze; press</li>
+		<li>Main Screen now shows collection plates in the maze; press<br>Space on a plate to jump into that collection.</li>
 	</ul></li>
 	<li>Command line support<ul>
 		<li>New command line options for Unix and Windows, see: dungeon --help.</li>
-		<li>Implemented: --level N, --collection NAME, --list-collections.</li>
+		<li>Implemented: --level N, --collection NAME, --list-collections.<br>Start directly in a level / collection; list available collections.</li>
 	</ul></li>
 	<li>Solution system<ul>
 		<li>Solutions now include notions of 'push' and 'press-cell' primitives.</li>
@@ -450,9 +636,9 @@ pre.highlight  {
 		<li>Walls, closed gates and locks stop the beam; portals relocate it.</li>
 	</ul></li>
 	<li>New actors and map cell types<ul>
-		<li>Cart: like lift, but slides by 1 cell on floor in 4 directions,</li>
+		<li>Cart: like lift, but slides by 1 cell on floor in 4 directions,<br>while lift moves in void until obstacle.</li>
 		<li>Mirrors attached to barrels, carts, or lifts.</li>
-		<li>New map cells: glass (an obstacle that passes the beam), traps,</li>
+		<li>New map cells: glass (an obstacle that passes the beam), traps,<br>beam generator, beam collector.</li>
 	</ul></li>
 	<li>Themes<ul>
 		<li>Added variants of mirrors and all new cell types across themes.</li>
@@ -483,7 +669,7 @@ pre.highlight  {
 </ul>
 
 <h2>Version 0.2.1 - 2025-06-13</h2>
-<ul>
+<ul class="news">
 	<li>Fix Windows compatibility<ul>
 		<li>Fix critical startup issues related to locale encodings.</li>
 		<li>Add dungeon.bat to run the game from Windows console.</li>
@@ -499,7 +685,7 @@ pre.highlight  {
 </ul>
 
 <h2>Version 0.2.0 - 2025-05-30</h2>
-<ul>
+<ul class="news">
 	<li>New Solution System<ul>
 		<li>Puzzles can provide a solution from any current position.</li>
 		<li>Solutions are computed first and then replayed centrally.</li>
@@ -547,7 +733,7 @@ pre.highlight  {
 </ul>
 
 <h2>Version 0.1.0 - 2025-02-24</h2>
-<ul>
+<ul class="news">
 	<li>12 puzzles<ul>
 		<li>Atomix Puzzle</li>
 		<li>Barrel Puzzle</li>

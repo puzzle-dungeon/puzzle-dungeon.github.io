@@ -190,6 +190,31 @@ a {
 	color: rgb(220, 110, 110);
 }
 
+.news > li {
+	padding: 0px 0px 6px 0px;
+}
+
+.news > li:has(ul) {
+	font-weight: bold;
+}
+
+.news > li > ul {
+	margin: 2px 0px 0px 0px;
+	font-weight: normal;
+}
+
+.news > li > ul > li {
+	padding: 2px 0px 1px 0px;
+}
+
+.news > li > ul > li > ul {
+	margin: 1px 0px 0px 0px;
+}
+
+.news > li > ul > li > ul > li {
+	padding: 1px 0px 0px 0px;
+}
+
 .puzzle-entry {
 	display: flex;
 	justify-content: space-evenly;
@@ -427,7 +452,7 @@ pre.highlight  {
 <h1>Barrel Puzzle (Sokoban)</h1>
 
 <div id="videos" class="all-medias">
-
+<div class="media"><div class="media-title">Barrel Puzzle levels</div><a href="videos/barrel-puzzle-1.html"><video><source src="videos/barrel-puzzle-1.webm"></video></a></div>
 </div>
 <div id="screenshots" class="all-medias">
 <div class="media"><div class="media-title">Barrel puzzle with 5 barrels</div><a href="screenshots/barrel-puzzle-1.html"><img src="screenshots/barrel-puzzle-1.webp"></a></div>

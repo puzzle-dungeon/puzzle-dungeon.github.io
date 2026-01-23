@@ -190,6 +190,31 @@ a {
 	color: rgb(220, 110, 110);
 }
 
+.news > li {
+	padding: 0px 0px 6px 0px;
+}
+
+.news > li:has(ul) {
+	font-weight: bold;
+}
+
+.news > li > ul {
+	margin: 2px 0px 0px 0px;
+	font-weight: normal;
+}
+
+.news > li > ul > li {
+	padding: 2px 0px 1px 0px;
+}
+
+.news > li > ul > li > ul {
+	margin: 1px 0px 0px 0px;
+}
+
+.news > li > ul > li > ul > li {
+	padding: 1px 0px 0px 0px;
+}
+
 .puzzle-entry {
 	display: flex;
 	justify-content: space-evenly;
@@ -436,6 +461,7 @@ pre.highlight  {
 <br>
 <h1>Videos of theme "classic"</h1>
 <div id="videos" class="all-medias">
+<div class="media"><div class="media-title">Barrel Puzzle levels</div><a href="videos/barrel-puzzle-1.html"><video><source src="videos/barrel-puzzle-1.webm"></video></a></div>
 <div class="media"><div class="media-title">Minotaur Puzzle levels</div><a href="videos/minotaur-puzzle-1.html"><video><source src="videos/minotaur-puzzle-1.webm"></video></a></div>
 <div class="media"><div class="media-title">12 Mirror Puzzle levels</div><a href="videos/mirror-puzzle-1.html"><video><source src="videos/mirror-puzzle-1.webm"></video></a></div>
 <div class="media"><div class="media-title">SwitchBox Puzzle levels 1-4</div><a href="videos/switchbox-puzzle-1.html"><video><source src="videos/switchbox-puzzle-1.webm"></video></a></div>

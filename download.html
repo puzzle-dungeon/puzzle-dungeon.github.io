@@ -190,6 +190,31 @@ a {
 	color: rgb(220, 110, 110);
 }
 
+.news > li {
+	padding: 0px 0px 6px 0px;
+}
+
+.news > li:has(ul) {
+	font-weight: bold;
+}
+
+.news > li > ul {
+	margin: 2px 0px 0px 0px;
+	font-weight: normal;
+}
+
+.news > li > ul > li {
+	padding: 2px 0px 1px 0px;
+}
+
+.news > li > ul > li > ul {
+	margin: 1px 0px 0px 0px;
+}
+
+.news > li > ul > li > ul > li {
+	padding: 1px 0px 0px 0px;
+}
+
 .puzzle-entry {
 	display: flex;
 	justify-content: space-evenly;
@@ -433,7 +458,7 @@ git clone <a href="https://github.com/mig0/puzzle-dungeon.git">https://github.co
 </code>
 
 <p>Or download the latest package:
-<a href="https://downloads.sourceforge.net/project/puzzle-dungeon/puzzle-dungeon-0.3.0.zip">puzzle-dungeon-0.3.0.zip</a>
+<a href="https://downloads.sourceforge.net/project/puzzle-dungeon/puzzle-dungeon-0.4.0.zip">puzzle-dungeon-0.4.0.zip</a>
 </p>
 
 <h2>Dependencies</h2>
